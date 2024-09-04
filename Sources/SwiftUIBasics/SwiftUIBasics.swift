@@ -21,10 +21,8 @@ class TextFieldObserver : ObservableObject {
 }
 
 @available(macOS 11.0, *)
-public struct SerachView: View {
+public struct SearchViewforSUB: View {
     @StateObject var textObserver = TextFieldObserver()
-    
-    @State var customText = ""
     
     public init() {}
     
@@ -41,31 +39,7 @@ public struct SerachView: View {
                         .stroke(Color.blue, lineWidth: 1)
                 )
                 .padding(.horizontal, 20)
-            Divider()
-            Text(customText)
-            TextFieldWithDebounce(debouncedText: $customText)
         }
     }
 }
 
-@available(macOS 11.0, *)
-struct TextFieldWithDebounce : View {
-    @Binding var debouncedText : String
-    @StateObject private var textObserver = TextFieldObserver()
-    
-    var body: some View {
-    
-        VStack {
-            TextField("Enter Something", text: $textObserver.searchText)
-                .frame(height: 30)
-                .padding(.leading, 5)
-                .overlay(
-                    RoundedRectangle(cornerRadius: 6)
-                        .stroke(Color.blue, lineWidth: 1)
-                )
-                .padding(.horizontal, 20)
-        }.onReceive(textObserver.$debouncedText) { (val) in
-            debouncedText = val
-        }
-    }
-}
