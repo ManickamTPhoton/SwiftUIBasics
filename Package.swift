@@ -7,7 +7,7 @@ let package = Package(
     name: "SwiftUIBasics",
     platforms: [
         .iOS(.v15),
-        .macOS(.v12),
+        .macOS(.v10_15),
         .tvOS(.v14),
         .watchOS(.v6)
     ],
